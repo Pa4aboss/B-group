@@ -1,13 +1,10 @@
 
-class t_graph:
-	graph = []
-	count_of_adj_vertices = []
-	count_of_vertices = 0
-	count_of_edges = 0
-
+class Graph:
 	def __init__(self, vertices, edges):
-		self.count_of_vertices += vertices
-		self.count_of_edges += edges
+		self.graph = []
+		self.count_of_vertices = vertices
+		self.count_of_edges = edges
+		self.count_of_adj_vertices = []
 		
 		for i in range(self.count_of_vertices):
 			self.graph.append([])
@@ -29,7 +26,6 @@ class t_graph:
 			print ("Error: Invalid parameter value")
 			exit(0)
 '''
-Никому не нужный, криво написанный вывод списка смежности графа в консоль.
 	def print_graph(self):
 		for i in range(self.count_of_vertices):
 			print(i + 1, " ->", end = " ")
@@ -39,7 +35,6 @@ class t_graph:
 '''
 
 '''
-Пример работы класса. Взял из Кормена, добавив петлю и отдельную вершину. Вроде работает.
 g = t_graph(6, 7)
 
 g.add_edge(1, 2)
