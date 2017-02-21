@@ -47,6 +47,17 @@ class Graph:
         # dot.render('output.gv')
         print(dot.source)
 
+    def check_if_way_exists(u, v):
+        visited = set()
+        dfs(u, visited)
+        return v in visited
+
+    def __dfs(v, visited):
+        visited.add(v)
+        for u in a[v]:
+            if not u in visited:
+                __dfs(u, visited)
+
 '''
 g = Graph(6, 7)
 
