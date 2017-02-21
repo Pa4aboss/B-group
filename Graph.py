@@ -24,7 +24,7 @@ class Graph:
         self.vertex_degree[second_vertex - 1] += 1
 
     def check_vertex(self, vertex):
-        if (vertex > self.count_of_vertices) or (vertex <= 0):
+        if vertex in range(1, self.count_of_vertices + 1):
             print("Error: Invalid parameter value")
             exit(0)
 
@@ -32,7 +32,7 @@ class Graph:
         for i in range(self.count_of_vertices):
             print(i + 1, " ->", end=" ")
             for j in range(self.vertex_degree[i]):
-                print(self.graph[i][j], " ->", end=" ")
+                print(self.graph[i][j] + 1, " ->", end=" ")
             print(end="\n")
 
     # Надо добавить в переменную среды PATH строку "C:\Program Files (x86)\Graphviz(тут версия своя)\bin\",
