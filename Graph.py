@@ -71,10 +71,3 @@ class Graph:
                 dot.edge(str(u), str(v))
         # print(dot.source)
         dot.render(graph_name)
-
-g = Graph()
-g.add_edge(Node(1), Node(2))
-g.add_edge(Node(3), Node(4))
-g.add_edge(Node(1), Node(4))
-print(g.find_comps())
-#g.draw_graph('lol', 'bmp')
