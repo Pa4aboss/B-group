@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.6
+# Created by: PyQt5 UI code generator 5.8
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -37,17 +37,25 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.pushButton = QtWidgets.QPushButton(self.centralWidget)
-        self.pushButton.setGeometry(QtCore.QRect(60, 600, 131, 32))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralWidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(190, 600, 171, 32))
-        self.pushButton_2.setObjectName("pushButton_2")
+        self.openFileButton = QtWidgets.QPushButton(self.centralWidget)
+        self.openFileButton.setGeometry(QtCore.QRect(60, 600, 131, 32))
+        self.openFileButton.setObjectName("openFileButton")
+        self.solutionButton = QtWidgets.QPushButton(self.centralWidget)
+        self.solutionButton.setGeometry(QtCore.QRect(190, 600, 171, 32))
+        self.solutionButton.setObjectName("solutionButton")
+        self.solutionLabel = QtWidgets.QLabel(self.centralWidget)
+        self.solutionLabel.setGeometry(QtCore.QRect(620, 130, 381, 451))
+        font = QtGui.QFont()
+        font.setPointSize(24)
+        self.solutionLabel.setFont(font)
+        self.solutionLabel.setText("")
+        self.solutionLabel.setObjectName("solutionLabel")
         self.background.raise_()
         self.tittle.raise_()
         self.frame.raise_()
-        self.pushButton.raise_()
-        self.pushButton_2.raise_()
+        self.openFileButton.raise_()
+        self.solutionButton.raise_()
+        self.solutionLabel.raise_()
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -55,6 +63,6 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "BGraph"))
-        self.pushButton.setText(_translate("MainWindow", " Открыть файл"))
-        self.pushButton_2.setText(_translate("MainWindow", "Построить решение"))
+        self.openFileButton.setText(_translate("MainWindow", " Открыть файл"))
+        self.solutionButton.setText(_translate("MainWindow", "Построить решение"))
 

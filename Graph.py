@@ -1,74 +1,80 @@
 import graphviz
 
 
+class Node:
+    def __init__(self, num, obj=None):
+        self.data = obj
+        self.num = num
+
+
 class Graph:
-    def __init__(self, vertices, edges):
-        self.graph = []
-        self.count_of_vertices = vertices
-        self.count_of_edges = edges
-        self.vertex_degree = []
+    def __init__(self):
+        self.graph = dict()
+        self.vertices = dict()
 
-        for i in range(self.count_of_vertices):
-            self.graph.append([])
-            self.vertex_degree.append(0)
+    def add_edge(self, e1, e2):
+        self.vertices[e1.num] = e1
+        self.vertices[e2.num] = e2
 
-    def add_edge(self, first_vertex, second_vertex):
-        self.check_vertex(first_vertex)
-        self.check_vertex(second_vertex)
-        # граф неориентированный
-        # петель нет проверки не нужны
-        # номера всех вершин сдвинуты на -1
-        self.graph[first_vertex - 1].append(second_vertex - 1)
-        self.graph[second_vertex - 1].append(first_vertex - 1)
-        self.vertex_degree[first_vertex - 1] += 1
-        self.vertex_degree[second_vertex - 1] += 1
+        if e1.num not in self.graph:
+            self.graph[e1.num] = []
 
-    def check_vertex(self, vertex):
-        if vertex in range(1, self.count_of_vertices + 1):
-            print("Error: Invalid parameter value")
-            exit(0)
+        self.graph[e1.num].append(e2.num)
 
-    def print_graph(self):
-        for i in range(self.count_of_vertices):
-            print(i + 1, " ->", end=" ")
-            for j in range(self.vertex_degree[i]):
-                print(self.graph[i][j] + 1, " ->", end=" ")
-            print(end="\n")
+    def is_linked(self, start):
+        visited_list = self.dfs(start)
 
-    # Надо добавить в переменную среды PATH строку "C:\Program Files (x86)\Graphviz(тут версия своя)\bin\",
-    # иначе render не сработает
+        for i in self.vertices:
+            if i not in visited_list:
+                return False
+
+        return True
+
+    def dfs(self, start, visited=None):
+        if visited is None:
+            visited = []
+
+        visited.append(start)
+
+        if start not in self.graph:
+            return visited
+
+        for u in self.graph[start]:
+            if u not in visited:
+                self.dfs(u, visited)
+
+        return visited
+
+    def find_comps(self):
+        visited = []
+
+        comps_count = 0
+
+        for i in self.vertices.keys():
+            if i not in visited:
+                visited = self.dfs(i, visited)
+                comps_count += 1
+                # for j in visited:
+                # print(j, end=' ')
+
+                # print('')
+
+        return comps_count
+
     def draw_graph(self, graph_name, extension):
-        dot = graphviz.Graph(comment=graph_name, format=extension)
-        for i in range(1, self.count_of_vertices + 1):
-            dot.node("{}".format(i))
-        for i in range(1, self.count_of_vertices + 1):
-            for j in self.graph[i - 1]:
-                dot.edge("{}".format(i), "{}".format(j + 1))
-        # dot.render('output.gv')
-        print(dot.source)
+        dot = graphviz.Graph(comment=graph_name, format=extension, engine='dot')
+        for i in self.vertices:
+            dot.node(str(i))
 
-    def check_if_way_exists(u, v):
-        visited = set()
-        dfs(u, visited)
-        return v in visited
+        for u in self.graph:
+            for v in self.graph[u]:
+                dot.edge(str(u), str(v))
+        # print(dot.source)
+        dot.render(graph_name)
 
-    def __dfs(v, visited):
-        visited.add(v)
-        for u in a[v]:
-            if not u in visited:
-                __dfs(u, visited)
-
-'''
-g = Graph(6, 7)
-
-g.add_edge(1, 2)
-g.add_edge(2, 3)
-g.add_edge(3, 4)
-g.add_edge(4, 5)
-g.add_edge(5, 2)
-g.add_edge(2, 4)
-g.add_edge(1, 5)
-
-g.print_graph()
-g.draw_graph('pep','png')
-'''
+g = Graph()
+g.add_edge(Node(1), Node(2))
+g.add_edge(Node(3), Node(4))
+g.add_edge(Node(1), Node(4))
+print(g.find_comps())
+#g.draw_graph('lol', 'bmp')
