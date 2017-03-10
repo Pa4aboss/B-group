@@ -3,7 +3,9 @@ import graphviz
 
 class Node:
     def __init__(self, num, obj=None):
+        #Параметры узла
         self.data = obj
+        #Номер узла
         self.num = num
 
 class Graph:
