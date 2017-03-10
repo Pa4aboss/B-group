@@ -3,28 +3,35 @@ import graphviz
 
 class Node:
     def __init__(self, num, obj=None):
+	#Параметры узла
         self.data = obj
+	#Номер узла
         self.num = num
 
-
+	
 class Graph:
     def __init__(self, directed=False):
+	#список смежности
         self.graph = dict()
+	#список вершин
         self.vertices = dict()
         self.undirected = not directed
         self.start = 0
         self.finish = 0
 
     def add_node(self, e1):
+	#Добовляем узел
         self.vertices[e1.num] = e1
 
     def add_edge(self, e1, e2):
+    #Добовляем вершины
 		if e1 not in self.vertices:
             self.vertices[e1.num] = e1
 
         if e2 not in self.vertices:
             self.vertices[e2.num] = e2
-
+	
+	#Заполняем список смежности
         if e1.num not in self.graph:
             self.graph[e1.num] = []
 
@@ -35,6 +42,7 @@ class Graph:
             self.graph[e2.num].append(e1.num)
 
     def dfs(self, start, visited=None):
+    #Применяем поиск в глубину
         if visited is None:
             visited = []
 
@@ -46,10 +54,10 @@ class Graph:
         for u in self.graph[start]:
             if u not in visited:
                 self.dfs(u, visited)
-
         return visited
 
     def find_comps(self):
+    #Поиск связных компонентов		
         visited = []
 
         comps_count = 0
@@ -61,6 +69,7 @@ class Graph:
         return comps_count
 
     def find_shortest_way(self, start, finish):
+		
         dist = [float('Inf') for i in range(len(self.graph.keys()) + 1)]
         parents = [[] for i in range(len(self.graph.keys()) + 1)]
         pairs = []
@@ -91,6 +100,7 @@ class Graph:
         return pairs
 
     def draw_graph(self, graph_name, extension, pairs=None):
+    #Отрисовываем граф
         drew = []
         if self.undirected:
             dot = graphviz.Graph(comment=graph_name, format=extension, engine='dot')
