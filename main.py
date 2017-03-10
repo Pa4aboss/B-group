@@ -7,6 +7,7 @@ from reader import Reader
 
 class MainWindow(QtWidgets.QWidget, Ui_MainWindow):
     def __init__(self):
+    #Инициализвация переменных
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.show()
@@ -16,12 +17,13 @@ class MainWindow(QtWidgets.QWidget, Ui_MainWindow):
         self.visualize = True
 
     def open_file_button_click(self):
-        #Вызов Парсера для файла
+        #Обработчик нажатия кнопки открыть файл
         self.frame.setStyleSheet("")
         fd = QtWidgets.QFileDialog()
         filepath = fd.getOpenFileName(None, fd.tr("Open Graph file"), ".", fd.tr("Textfile(*.txt)"))[0]
         if filepath == '':
             return 1
+        #Вызов Парсера для файла
         self.g = Reader.read(filepath)
         Mb = QtWidgets.QMessageBox()
         Mb.setText("Вы хотите включить режим визуализации?\nПримечание. Большие графы могут отображаться некорректно.")
@@ -38,7 +40,7 @@ class MainWindow(QtWidgets.QWidget, Ui_MainWindow):
             self.frame.setStyleSheet("background-image: url(lol.png); background-repeat: no-repeat;")
 
     def solution_button_click(self):
-        
+        #Обработчик нажатия кнопки выполнить
         self.frame.setStyleSheet("")
         pairs = self.g.find_shortest_way(self.g.start, self.g.finish)
         comps = self.g.find_comps()
