@@ -6,12 +6,12 @@ class Node:
         self.data = obj
         self.num = num
 
-
 class Graph:
     def __init__(self):
         self.graph = dict()
         self.vertices = dict()
 
+    #Добовляем вершины    
     def add_edge(self, e1, e2):
         self.vertices[e1.num] = e1
         self.vertices[e2.num] = e2
@@ -20,16 +20,8 @@ class Graph:
             self.graph[e1.num] = []
 
         self.graph[e1.num].append(e2.num)
-
-    def is_linked(self, start):
-        visited_list = self.dfs(start)
-
-        for i in self.vertices:
-            if i not in visited_list:
-                return False
-
-        return True
-
+        
+    #Применяем поиск в глубину
     def dfs(self, start, visited=None):
         if visited is None:
             visited = []
@@ -44,7 +36,8 @@ class Graph:
                 self.dfs(u, visited)
 
         return visited
-
+    
+    #Поиск связных компонентов
     def find_comps(self):
         visited = []
 
@@ -56,11 +49,11 @@ class Graph:
                 comps_count += 1
                 # for j in visited:
                 # print(j, end=' ')
-
                 # print('')
 
         return comps_count
-
+    
+    #Отрисовываем граф
     def draw_graph(self, graph_name, extension):
         dot = graphviz.Graph(comment=graph_name, format=extension, engine='dot')
         for i in self.vertices:
