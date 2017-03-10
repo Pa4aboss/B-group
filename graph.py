@@ -69,7 +69,8 @@ class Graph:
         return comps_count
 
     def find_shortest_way(self, start, finish):
-		
+    #Поиск кратчайшего пути
+
         dist = [float('Inf') for i in range(len(self.graph.keys()) + 1)]
         parents = [[] for i in range(len(self.graph.keys()) + 1)]
         pairs = []
