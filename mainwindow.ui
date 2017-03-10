@@ -71,9 +71,9 @@
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>130</y>
-      <width>581</width>
-      <height>451</height>
+      <y>110</y>
+      <width>480</width>
+      <height>480</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -112,19 +112,25 @@
    <widget class="QLabel" name="solutionLabel">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>130</y>
-      <width>381</width>
-      <height>451</height>
+      <x>520</x>
+      <y>110</y>
+      <width>480</width>
+      <height>480</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>24</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <zorder>background</zorder>
