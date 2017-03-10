@@ -8,21 +8,24 @@ class Node:
 
 class Graph:
     def __init__(self):
+        #список смежности
         self.graph = dict()
+        #список вершин
         self.vertices = dict()
-
-    #Добовляем вершины    
+    
     def add_edge(self, e1, e2):
+    #Добовляем вершины        
         self.vertices[e1.num] = e1
         self.vertices[e2.num] = e2
 
+        #Заполняем список смежности
         if e1.num not in self.graph:
             self.graph[e1.num] = []
 
         self.graph[e1.num].append(e2.num)
         
-    #Применяем поиск в глубину
     def dfs(self, start, visited=None):
+    #Применяем поиск в глубину
         if visited is None:
             visited = []
 
@@ -37,8 +40,8 @@ class Graph:
 
         return visited
     
-    #Поиск связных компонентов
     def find_comps(self):
+    #Поиск связных компонентов
         visited = []
 
         comps_count = 0
@@ -50,11 +53,10 @@ class Graph:
                 # for j in visited:
                 # print(j, end=' ')
                 # print('')
-
         return comps_count
     
-    #Отрисовываем граф
     def draw_graph(self, graph_name, extension):
+        #Отрисовываем граф
         dot = graphviz.Graph(comment=graph_name, format=extension, engine='dot')
         for i in self.vertices:
             dot.node(str(i))
