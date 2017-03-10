@@ -15,8 +15,11 @@ class Graph:
         self.graph = dict()
 	#список вершин
         self.vertices = dict()
+	#ориентированный граф или нет
         self.undirected = not directed
+	#Начало пути в графе
         self.start = 0
+	# конец пути
         self.finish = 0
 
     def add_node(self, e1):
