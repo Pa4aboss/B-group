@@ -2,6 +2,7 @@ import Graph
 import struct
 
 class Reader:
+  
   def read(file_path):
     vertices = set()
     edges_count = 0
