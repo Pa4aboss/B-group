@@ -72,36 +72,36 @@ class Graph:
         return comps_count
 
     def find_shortest_way(self, start, finish):
-    #Поиск кратчайшего пути
+    #Поиск кратчайшего пути - алгоритм Дейкстры
 
-        dist = [float('Inf') for i in range(len(self.graph.keys()) + 1)]
-        parents = [[] for i in range(len(self.graph.keys()) + 1)]
-        pairs = []
-        dist[start] = 0
-        visited = set()
-        for i in range(len(self.graph.keys()) + 1):
-            v = -1
-            for j in range(len(self.graph.keys()) + 1):
+        dist = [float('Inf') for i in range(len(self.graph.keys()) + 1)]   #Для всех вершин расстояние равно бесконечность
+        parents = [[] for i in range(len(self.graph.keys()) + 1)]   #Для всех вершин задаем пустой список их предков
+        pairs = []   #массив ребер кратчайшего пути
+        dist[start] = 0   #расстояние до стартовой вершины равно 0
+        visited = set()   #список посещенных вершин 
+        for i in range(len(self.graph.keys()) + 1):   #бежим по всем вершинам графа
+            v = -1   #v - вершина, в которую мы пойдем на этом шаге цикла
+            for j in range(len(self.graph.keys()) + 1):   #цикл для поиска v - вершины, в которую мы пойдем. Она выбирается как ближайшая непосещенная вершина
                 if j not in visited and (v == -1 or dist[j] < dist[v]):
                     v = j
-            if dist[v] == float('Inf'):
+            if dist[v] == float('Inf'):   #если расстояние до выбранной вершина оказывается равным бесконечности - останавливаем цикл 
                 break
-            visited.add(v)
-            if not self.graph.get(v):
+            visited.add(v)    #добавляем выбранную вершину в список посещенных
+            if not self.graph.get(v):   #проверяем, если ли в списке смежности вершины v какие-либо вершины. Если нет, то останавливаем цикл
                 break
-            for j in self.graph.get(v):
-                if dist[v] + 1 < dist[j]:
-                    dist[j] = dist[v] + 1
+            for j in self.graph.get(v):   #просматриваем все  смежные с v вершины и выпонляем "релаксации" - пытаемся уменьшить расстояния до них
+                if dist[v] + 1 < dist[j]:    #если ресстояние до какий-либо смежной вершины удается уменьшить, то 
+                    dist[j] = dist[v] + 1   #сохраняем результат с новым расстоянием
                     if v not in parents[j]:
-                        parents[j].append(v)
-                        parents[j] += (parents[v])
-        parents[finish].insert(0, finish)
+                        parents[j].append(v)   #смежной вершине добавляем в качестве предка вершину v
+                        parents[j] += (parents[v])   #а также всех предков v, чтобы корректно восстановить путь
+        parents[finish].insert(0, finish)   #добавим в конец пути вершину finish (т.к. путь хранится в обратном порядке, добавляем ее в начало массива parents)
         prev = -1
-        for j in parents[finish]:
+        for j in parents[finish]:   #формируем пары вершин (т.е. ребра) пути для более удобной отрисовки
             if prev != -1:
                 pairs.append([prev, j])
             prev = j
-        return pairs
+        return pairs   #возвращаем массив ребер кратчайшего пути
 
     def draw_graph(self, graph_name, extension, pairs=None):
     #Отрисовываем граф
