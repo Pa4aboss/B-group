@@ -106,21 +106,24 @@ class Graph:
 
     def draw_graph(self, graph_name, extension, pairs=None):
     #Отрисовка графа
-        drew = []
+        drew = [] #массив уже отрисованных ребер
+	#Проверка ориентированости
         if self.undirected:
             dot = graphviz.Graph(comment=graph_name, format=extension, engine='dot')
         else:
             dot = graphviz.Digraph(comment=graph_name, format=extension, engine='dot')
-        dot.body.append('size=\"5,5!\"')
+        dot.body.append('size=\"5,5!\"') #Размер графа
         for i in self.vertices:
-            dot.node(str(i))
+            dot.node(str(i)) #Рисуем вершины
         for u in self.graph:
             for v in self.graph[u]:
                 if self.undirected and [v, u] in drew:
                     continue
                 drew.append([u, v])
                 if pairs and ([v, u] in pairs or [u, v] in pairs):
+				#Отрисовка пути
                     dot.edge(str(u), str(v), color='red')
                 else:
+				#Отрисовка ребер
                     dot.edge(str(u), str(v))
         dot.render(graph_name)
