@@ -121,9 +121,9 @@ class Graph:
                     continue
                 drew.append([u, v])
                 if pairs and ([v, u] in pairs or [u, v] in pairs):
-				#Отрисовка пути
+		#Отрисовка пути
                     dot.edge(str(u), str(v), color='red')
                 else:
-				#Отрисовка ребер
+		#Отрисовка ребер
                     dot.edge(str(u), str(v))
         dot.render(graph_name)
