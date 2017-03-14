@@ -27,8 +27,8 @@ class Graph:
         self.vertices[e1.num] = e1
 
     def add_edge(self, e1, e2):
-    #Добовляем вершины
-		if e1 not in self.vertices:
+    	#Добовляем вершины
+	if e1 not in self.vertices:
             self.vertices[e1.num] = e1
 
         if e2 not in self.vertices:
@@ -37,15 +37,16 @@ class Graph:
 	#Заполняем список смежности
         if e1.num not in self.graph:
             self.graph[e1.num] = []
-
+	
         self.graph[e1.num].append(e2.num)
+	#Если граф не ориентированый, добавляем обратное ребро
         if self.undirected:
             if e2.num not in self.graph:
                 self.graph[e2.num] = []
             self.graph[e2.num].append(e1.num)
 
     def dfs(self, start, visited=None):
-    #Применяем поиск в глубину
+    #Поиск в глубину
         if visited is None:
             visited = []
 
@@ -64,7 +65,7 @@ class Graph:
         visited = []
 
         comps_count = 0
-
+	#Запускаем ДФС для каждой вершины в графе
         for i in self.vertices.keys():
             if i not in visited:
                 visited = self.dfs(i, visited)
@@ -104,7 +105,7 @@ class Graph:
         return pairs   #возвращаем массив ребер кратчайшего пути
 
     def draw_graph(self, graph_name, extension, pairs=None):
-    #Отрисовываем граф
+    #Отрисовка графа
         drew = []
         if self.undirected:
             dot = graphviz.Graph(comment=graph_name, format=extension, engine='dot')
