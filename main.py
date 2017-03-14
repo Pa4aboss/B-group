@@ -17,7 +17,7 @@ class MainWindow(QtWidgets.QWidget, Ui_MainWindow):
         self.visualize = True
 
     def open_file_button_click(self):
-        #Обработчик нажатия кнопки открыть файл
+    #Обработчик нажатия кнопки открыть файл
         self.frame.setStyleSheet("")
         fd = QtWidgets.QFileDialog()
         filepath = fd.getOpenFileName(None, fd.tr("Open Graph file"), ".", fd.tr("Textfile(*.txt)"))[0]
@@ -40,7 +40,7 @@ class MainWindow(QtWidgets.QWidget, Ui_MainWindow):
             self.frame.setStyleSheet("background-image: url(lol.png); background-repeat: no-repeat;")
 
     def solution_button_click(self):
-        #Обработчик нажатия кнопки выполнить
+    #Обработчик нажатия кнопки выполнить
         self.frame.setStyleSheet("")
         pairs = self.g.find_shortest_way(self.g.start, self.g.finish)
         comps = self.g.find_comps()
