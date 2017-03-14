@@ -2,7 +2,7 @@ import graphviz
 
 
 class Node:
-    def __init__(self, num, obj=None):
+    def __init__(self, num, obj=None): #Объект, НомерВершины, Данные
 	#Параметры узла
         self.data = obj
 	#Номер узла
@@ -10,7 +10,7 @@ class Node:
 
 	
 class Graph:
-    def __init__(self, directed=False):
+    def __init__(self, directed=False): #Объект, Флаг ориентированости
 	#список смежности
         self.graph = dict()
 	#список вершин
@@ -22,11 +22,11 @@ class Graph:
 	# конец пути
         self.finish = 0
 
-    def add_node(self, e1):
+    def add_node(self, e1): #Объект, вершина
 	#Добовляем узел
         self.vertices[e1.num] = e1
 
-    def add_edge(self, e1, e2):
+    def add_edge(self, e1, e2): #Объект, вершина1,вершина2
     	#Добовляем вершины
 	if e1 not in self.vertices:
             self.vertices[e1.num] = e1
@@ -45,7 +45,7 @@ class Graph:
                 self.graph[e2.num] = []
             self.graph[e2.num].append(e1.num)
 
-    def dfs(self, start, visited=None):
+    def dfs(self, start, visited=None): #Объект, Начальная вершина, посещенные вершины
     #Поиск в глубину
         if visited is None:
             visited = []
@@ -60,7 +60,7 @@ class Graph:
                 self.dfs(u, visited)
         return visited
 
-    def find_comps(self):
+    def find_comps(self): #Объект
     #Поиск связных компонентов		
         visited = []
 
@@ -72,7 +72,7 @@ class Graph:
                 comps_count += 1
         return comps_count
 
-    def find_shortest_way(self, start, finish):
+    def find_shortest_way(self, start, finish): #Объект, начальная  вершина, конечная вершина
     #Поиск кратчайшего пути - алгоритм Дейкстры
 
         dist = [float('Inf') for i in range(len(self.graph.keys()) + 1)]   #Для всех вершин расстояние равно бесконечность
@@ -104,7 +104,7 @@ class Graph:
             prev = j
         return pairs   #возвращаем массив ребер кратчайшего пути
 
-    def draw_graph(self, graph_name, extension, pairs=None):
+    def draw_graph(self, graph_name, extension, pairs=None): #Объект, ИмяГрафа, Расширение, Ребра для пути 
     #Отрисовка графа
         drew = [] #массив уже отрисованных ребер
 	#Проверка ориентированости
